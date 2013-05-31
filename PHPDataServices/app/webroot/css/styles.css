@@ -1,0 +1,14 @@
+body{
+	width: 100%;
+}
+
+label{
+	float: left;
+	width: 200px;
+}
+
+.error-message{
+	margin-left: 200px;
+	margin-bottom:20px;
+	color:#FF0000;
+}
