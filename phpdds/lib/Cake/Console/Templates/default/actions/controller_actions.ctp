@@ -19,6 +19,11 @@
  */
 ?>
 
+	public $paginate = array(
+        'limit' => 10,       
+    );
+
+
 /**
  * <?php echo $admin ?>index method
  *

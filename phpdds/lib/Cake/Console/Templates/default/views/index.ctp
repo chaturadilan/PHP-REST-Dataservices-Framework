@@ -17,9 +17,11 @@
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 ?>
-<div class="<?php echo $pluralVar; ?> index">
-	<h2><?php echo "<?php echo __('{$pluralHumanName}'); ?>"; ?></h2>
-	<table cellpadding="0" cellspacing="0">
+<fieldset>	
+		<?php echo "<?php echo \$this->Html->link('<i class=\"icon-plus\"></i> ' . __('{$singularHumanName}'), array('action' => 'add'),  array('class' => 'btn pull-right', 'escape' => false)); ?>"; ?>
+		<h3><?php echo "<?php echo __('{$pluralHumanName}'); ?>"; ?></h3>
+</fieldset>
+	<table class="table table-striped">
 	<tr>
 	<?php foreach ($fields as $field): ?>
 		<th><?php echo "<?php echo \$this->Paginator->sort('{$field}'); ?>"; ?></th>
@@ -46,9 +48,8 @@
 		}
 
 		echo "\t\t<td class=\"actions\">\n";
-		echo "\t\t\t<?php echo \$this->Html->link(__('View'), array('action' => 'view', \${$singularVar}['{$modelClass}']['{$primaryKey}'])); ?>\n";
-		echo "\t\t\t<?php echo \$this->Html->link(__('Edit'), array('action' => 'edit', \${$singularVar}['{$modelClass}']['{$primaryKey}'])); ?>\n";
-		echo "\t\t\t<?php echo \$this->Form->postLink(__('Delete'), array('action' => 'delete', \${$singularVar}['{$modelClass}']['{$primaryKey}']), null, __('Are you sure you want to delete # %s?', \${$singularVar}['{$modelClass}']['{$primaryKey}'])); ?>\n";
+		echo "\t\t\t<?php echo \$this->Html->link('', array('action' => 'edit', \${$singularVar}['{$modelClass}']['{$primaryKey}']),  array('title'=>__('Edit'), 'class' => 'icon-pencil')); ?>\n";
+		echo "\t\t\t<?php echo \$this->Form->postLink('', array('action' => 'delete', \${$singularVar}['{$modelClass}']['{$primaryKey}']), array('title'=>__('Delete'), 'class' => 'icon-remove'), __('Are you sure you want to delete # %s?', \${$singularVar}['{$modelClass}']['{$primaryKey}'])); ?>\n";
 		echo "\t\t</td>\n";
 	echo "\t</tr>\n";
 
@@ -62,31 +63,16 @@
 	));
 	?>"; ?>
 	</p>
-	<div class="paging">
-	<?php
-		echo "<?php\n";
-		echo "\t\techo \$this->Paginator->prev('< ' . __('previous'), array(), null, array('class' => 'prev disabled'));\n";
-		echo "\t\techo \$this->Paginator->numbers(array('separator' => ''));\n";
-		echo "\t\techo \$this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));\n";
-		echo "\t?>\n";
-	?>
+	<div class="pagination">	
+	    <?php
+            	echo "<?php\n";
+				echo "\t\techo '<ul>';\n";
+                echo "\t\techo \$this->Paginator->prev(__('prev'), array('tag' => 'li'), null, array('tag' => 'li','class' => 'active','disabledTag' => 'a'));\n";
+                echo "\t\techo \$this->Paginator->numbers(array('separator' => '','currentTag' => 'a', 'currentClass' => 'active','tag' => 'li','first' => 1));\n";
+                echo "\t\techo \$this->Paginator->next(__('next'), array('tag' => 'li','currentClass' => 'disabled'), null, array('tag' => 'li','class' => 'active','disabledTag' => 'a'));\n";
+                echo "\t\techo '</ul>';\n";
+				echo "\t?>\n";
+		?>
+	
+	
 	</div>
-</div>
-<div class="actions">
-	<h3><?php echo "<?php echo __('Actions'); ?>"; ?></h3>
-	<ul>
-		<li><?php echo "<?php echo \$this->Html->link(__('New " . $singularHumanName . "'), array('action' => 'add')); ?>"; ?></li>
-<?php
-	$done = array();
-	foreach ($associations as $type => $data) {
-		foreach ($data as $alias => $details) {
-			if ($details['controller'] != $this->name && !in_array($details['controller'], $done)) {
-				echo "\t\t<li><?php echo \$this->Html->link(__('List " . Inflector::humanize($details['controller']) . "'), array('controller' => '{$details['controller']}', 'action' => 'index')); ?> </li>\n";
-				echo "\t\t<li><?php echo \$this->Html->link(__('New " . Inflector::humanize(Inflector::underscore($alias)) . "'), array('controller' => '{$details['controller']}', 'action' => 'add')); ?> </li>\n";
-				$done[] = $details['controller'];
-			}
-		}
-	}
-?>
-	</ul>
-</div>

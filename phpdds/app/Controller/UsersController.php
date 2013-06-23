@@ -8,6 +8,11 @@ App::uses('AppController', 'Controller');
 class UsersController extends AppController {
 	
 	
+	public function beforeFilter() {
+	    $this->set('page_for_layout', 'users');
+	}
+	
+	
 	public function login() {
 		if ($this->request->is('post')) {
 			if ($this->Auth->login()) {
@@ -66,6 +71,8 @@ class UsersController extends AppController {
 				$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
 			}
 		}
+		
+		$this -> render('edit');
 	}
 
 /**
@@ -89,7 +96,7 @@ class UsersController extends AppController {
 		} else {
 			$options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
 			$this->request->data = $this->User->find('first', $options);
-		}
+		}		
 	}
 
 /**

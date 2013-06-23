@@ -16,7 +16,7 @@ class User extends AppModel {
 					),
 					'between' => array(
 							'rule'    => array('between', 5, 15),
-							'message' => 'Password must be between 5 to 15 characters'
+							'message' => 'Username must be between 5 to 15 characters'
 					)
 			),
 			'password' => array(
