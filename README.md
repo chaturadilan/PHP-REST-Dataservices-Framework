@@ -1,4 +1,4 @@
 PHP-REST-Dataservices-Framework
 ===============================
 
-A Dataservice framework for PHP to generate easy REST based web services.
+Note: This project is not active. Please see the active project: https://github.com/chaturadilan/PHP-Data-Services 
